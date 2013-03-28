@@ -11,14 +11,16 @@ class Missile
 	int _health;
 public:
 	Missile();
-	Missile( ci::Vec2f,float);
+	Missile( ci::Vec2f);
 	void update();
 	void draw();
 
-	ci::Vec2f	mdir;
-	ci::Vec2f	mloc;
+	ci::Vec2f	_Dir;
+	ci::Vec2f	_Loc;
 
-	float		mvel;
+	float		_Vel;
+
+	float _Radius;
 
 };
 

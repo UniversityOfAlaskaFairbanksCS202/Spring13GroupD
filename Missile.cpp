@@ -9,9 +9,23 @@ Missile::Missile()
 {
 }
 
-Missile::Missile(Vec2f Loc, float vel)
+Missile::Missile(Vec2f Loc)
 {
-	mloc=Loc;
-	//mdir= getWindowHeight() cant figure out how to get it to go straight down?
-	mvel=vel;
+	Rand pos;
+	_Loc = Vec2f (0,pos.nextFloat());
+	_Dir = Rand::randVec2f();
+	_Vel = pos.randFloat();
+	_Radius = 3.0f;
+}
+
+void Missile::update()
+{
+	_Loc += _Dir * _Vel;
+}
+
+void Missile::draw()
+{
+	gl::drawSolidCircle ( _Loc, _Radius);
+}
+
 
