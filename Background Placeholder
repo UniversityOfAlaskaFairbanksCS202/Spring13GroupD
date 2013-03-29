@@ -1,0 +1,15 @@
+// Still trying to get the cinder files to work properly on my computer //
+// Until then can someone try this out in their own code to see if it works properly? I'd appreciate it //
+// This background is just a modded version of the Super Rough Sketch someone did last week //
+// A more dynamic background will come in the future one I figure out cinder more //
+
+// void CinderProjectTestingApp::setup(){} - just through it right in //
+gl::Texture Background; 
+
+// void CinderProjectTestingApp::draw(){} //
+if(Background) {
+
+// for this you might not even have to have the Vec2f() the image is already set to 800x600 so a straight 
+// import should be fine. 
+gl::draw(Background, Vec2f(800.0f, 600.0f)); 
+}
