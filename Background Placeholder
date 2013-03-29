@@ -1,3 +1,5 @@
+// Picture is on the Google Docs Drive //
+
 // void CinderProjectTestingApp::setup(){} - just through it right in //
 gl::Texture Background; 
 
