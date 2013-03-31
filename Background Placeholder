@@ -1,0 +1,9 @@
+// Picture is on the Google Docs Drive //
+
+// void CinderProjectTestingApp::setup(){} - just through it right in //
+gl::Texture Background; 
+
+// void CinderProjectTestingApp::draw(){} //
+if(Background) {
+gl::draw(Background, Vec2f(800.0f, 600.0f)); 
+}
