@@ -1,8 +1,8 @@
-#ifndef MISSILE_H_INCLUDED
-#define MISSILE_H_INCLUDED
+#pragma once
 
 #include "cinder/Channel.h"
 #include "cinder/Vector.h"
+#include "MissileController.h"
 
 #include <vector>
 
@@ -11,10 +11,9 @@ class Missile
 	int _health;
 public:
 	Missile();
-	Missile( ci::Vec2f);
 	void update();
 	void draw();
-
+	void collisionDetection(MissileController &);
 	ci::Vec2f	_Dir;
 	ci::Vec2f	_Loc;
 
@@ -22,6 +21,8 @@ public:
 
 	float _Radius;
 
+	
+
 };
 
-#endif
+
