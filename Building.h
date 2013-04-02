@@ -8,15 +8,14 @@
 
 class Building
 {
-	int state;
-	gl::Texture myImage;
+	int state; //"Health" of buildings.
+	gl::Texture myImage; // The image displayed for each building
 	
 public:
-	Building();
-	int getState();
-	Building(int state);
-	void update();
-	void draw();
+	Building(); //Defualt constructor sets buildings equal to full health and base animation
+	Building(int state); //Checks the state agaisnt a switch loop and changes the picture displayed based on the state(health)
+	void update(); //Checks for imapct from missile.
+	void draw();  //Draws the 4 Buildings in the 4 locations around the map.
 private:
 
 
