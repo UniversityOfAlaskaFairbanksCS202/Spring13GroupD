@@ -16,8 +16,9 @@ static Vec2f centerCorrection = Vec2f (40.0f, 40.0f);
 Missile::Missile()
 {
     _health = true;
-	_location = Vec2f (Rand::randFloat(800.0), 0.0f);
-    _buildingLoc = _Building[Rand::randInt(0,3)] + centerCorrection;
+    _begLocation = Vec2f (Rand::randFloat(800.0), 0.0f);
+	_location = _begLocation;
+    _buildingLoc = _Building[Rand::randInt(0,4)] + centerCorrection;
 	_velocity = 1.0f;
 	_radius = 3.0f;
     _dirToBuilding = _buildingLoc - _location;
@@ -32,13 +33,18 @@ void Missile::update()
     {
         _radius = 100.0;
         _health = false;
+        
     }
     
 }
 
 void Missile::draw()
 {
-	gl::drawSolidCircle ( _location, _radius);
+    gl::drawLine(_begLocation, _location);
+    if (!_health)
+    {
+        gl::drawSolidCircle ( _location, _radius);
+    }
 }
 
 bool Missile::collisionDetection()
