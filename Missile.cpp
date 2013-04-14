@@ -6,46 +6,77 @@
 
 using namespace ci;
 
-
+static Vec2f _Building1 = Vec2f( 50.0f, 487.0f );
+static Vec2f _Building2 = Vec2f( 200.0f, 487.0f );
+static Vec2f _Building3 = Vec2f( 510.0f, 487.0f );
+static Vec2f _Building4 = Vec2f( 660.0f, 487.0f );
+static Vec2f _Building[4] = {_Building1, _Building2, _Building3, _Building4};
+static Vec2f centerCorrection = Vec2f (40.0f, 40.0f);
 
 Missile::Missile()
 {
-	Rand pos;
-	_Loc = Vec2f (0,pos.nextFloat());
-	_Dir = Rand::randVec2f(); // random direction is just a placeholder till i get the direction function written
-	_Vel = pos.randFloat();
-	_Radius = 3.0f;
+    _health = true;
+    _begLocation = Vec2f (Rand::randFloat(800.0), 0.0f);
+	_location = _begLocation;
+    _buildingLoc = _Building[Rand::randInt(0,4)] + centerCorrection;
+	_velocity = 1.0f;
+	_radius = 3.0f;
+    _dirToBuilding = _buildingLoc - _location;
+    _dirToBuilding.safeNormalize();
+
 }
 
 void Missile::update()
 {
-	_Loc += _Dir * _Vel;
+	_location += _dirToBuilding * _velocity;
+    if(collisionDetection())
+    {
+        _radius = 100.0;
+        _health = false;
+        
+    }
+    
 }
 
 void Missile::draw()
 {
-	gl::drawSolidCircle ( _Loc, _Radius);
+    gl::drawLine(_begLocation, _location);
+    if (!_health)
+    {
+        gl::drawSolidCircle ( _location, _radius);
+    }
 }
 
-void Missile::collisionDetection(MissileController &lhs)
+bool Missile::collisionDetection()
 {
-	/* created a vector object for each building,though i am worried this approach will lead to a out of memory error if the game is played too long
-	   (if someone can come up with a logic using dyanmic allocation,feel free to change it (PS: Group D only :D))*/
-	
-	Vec2f building_1(10.0f, 350.0f);
-	Vec2f building_2(150.0f, 350.0f);
-	Vec2f building_3(400.0f,350.0f);
-	Vec2f building_4(540.0f, 350.0f);
-
-	
-	// If the location of any missile object equals the location of any building then remove one missile
-	
-	if (_Loc == building_1 || _Loc == building_2 || _Loc == building_3 || _Loc == building_3)
-	{
-		lhs.removeMissiles (1); // function defined in MissileController.cpp
-
-		//Placeholder for building health reduction function
-	}
+    int left1, left2;
+	int right1, right2;
+	int top1, top2;
+	int bottom1, bottom2;
+    
+	left1 = static_cast<int>(_location.x);
+	left2 = static_cast<int>(_buildingLoc.x);
+	right1 = static_cast<int>(_location.x) + 10;
+	right2 = static_cast<int>(_buildingLoc.x) + 10;
+	top1 = static_cast<int>(_location.y);
+	top2 = static_cast<int>(_buildingLoc.y);
+	bottom1 = static_cast<int>(_location.y) + 10;
+	bottom2 = static_cast<int>(_buildingLoc.y) + 10;
+    
+	if (bottom1 < top2)
+        return(false);
+	if (top1 > bottom2)
+        return(false);
+    
+	if (right1 < left2)
+        return(false);
+	if (left1 > right2)
+        return(false);
+    
+	return(true);
+    
+    
+    
 }
 
 
