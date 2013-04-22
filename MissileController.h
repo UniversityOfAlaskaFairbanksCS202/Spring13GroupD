@@ -5,9 +5,11 @@
 #include "Missile.h"
 #include <list>
 
+
 class MissileController
 {
 public:
+	friend class TurretMissile;
 	MissileController();
 	void update();
 	void draw();
