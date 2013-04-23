@@ -5,7 +5,6 @@ class TurretMissile
 public:
   	ci::Vec2f _mLocation;
 	ci::Vec2f _cursorLoc;
-	ci::Vec2f _mPath;
 	float _velocity;
 	float _radius;
 	bool _health;
