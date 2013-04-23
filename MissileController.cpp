@@ -46,22 +46,39 @@ void MissileController::draw()
 		p->draw();
 
     }
+    for( list<TurretMissile>::iterator p = _TurretMissile.begin(); p != _TurretMissile.end(); ++p)
+    {
+        if (_TurretMissile.size()>0)
+		p->draw();
+
+    }
 }
 
 void MissileController::addMissiles(int numMissiles)
+{
+	for( int i = 0; i< numMissiles; ++i)
+	{
+	_Missile.push_back ( Missile());
+	}
+
+	for( int i = 0; i< numMissiles; ++i)
+	{
+	_TurretMissile.push_back ( TurretMissile());
+	}
+}
+
+/*void MissileController::removeMissiles( int numMissiles)
 {
 for( int i = 0; i< numMissiles; ++i)
 {
 _Missile.push_back ( Missile());
 }
+
+for( int i = 0; i< numMissiles; ++i)
+{
+_TurretMissile.push_back ( TurretMissile());
 }
 
-/*void MissileController::removeMissiles( int numMissiles)
-{
-for ( int i = 0; i < numMissiles; ++i)
-{
-_Missile.pop_back();
-}
 }*/
 
 
