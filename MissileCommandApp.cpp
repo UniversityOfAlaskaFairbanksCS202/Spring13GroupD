@@ -2,10 +2,11 @@
 #include "cinder/gl/gl.h"
 #include "cinder/ImageIo.h"
 #include "cinder/gl/Texture.h"
+#include "Resources.h"
 
 #include "Missile.h"
 #include "MissileController.h"
-#include "Building.h"
+
 
 using namespace ci;
 using namespace ci::app;
@@ -22,10 +23,10 @@ static int level1Missiles = 10;
 class CinderProjectTESTINGApp : public AppBasic {
 public:
     void prepareSettings( Settings *settings );
-	void setup();
-	void mouseDown( MouseEvent event );
-	void update();
-	void draw();
+void setup();
+//void mouseDown( MouseEvent event );
+void update();
+void draw();
     gl::Texture _buildingImage;
     gl::Texture _background;
     static int count;
@@ -38,31 +39,23 @@ int CinderProjectTESTINGApp::count = 0;
 
 void CinderProjectTESTINGApp::prepareSettings( Settings *settings )
 {
-	settings->setWindowSize( 800, 600 );
-	settings->setFrameRate( 60.0f );
+settings->setWindowSize( 800, 600 );
+settings->setFrameRate( 60.0f );
 }
 
 void CinderProjectTESTINGApp::setup()
 {
-    _background = gl::Texture( loadImage( loadResource( "MC.BG.Placeholder.png" ) ) );
-    _buildingImage = gl::Texture( loadImage( loadResource( "building.png" ) ) );
+    _background = gl::Texture( loadImage( loadResource(RES_BACKGROUND ) ) );
+    _buildingImage = gl::Texture( loadImage( loadResource(RES_BUILDING ) ) );
 }
-
-void Turret::mouseMove(MouseEvent event) 
+/*void CinderProjectTESTINGApp::mouseDown( MouseEvent event )
 {
-		_cursorLoc = event.getPos();
+    if( event.isLeft())
+    {
+        _MissileController.addMissiles(1);
+    }
 }
-
-void TurretMissile::mouseDown( event ) 
-{
-	if ( event.isLeft()) {
-		_missileStartHolder.x = 300.0;
-		_missileStartHolder.y = 400.0;
-		TurretMissile(_mLocation, _missileStartHolder);
-		}
-}
-
-
+*/
 void CinderProjectTESTINGApp::update()
 {
     if(count < level1Missiles)
@@ -71,6 +64,7 @@ void CinderProjectTESTINGApp::update()
         {
             _MissileController.addMissiles(1);
             count++;
+
         }
     }
     _MissileController.update();
@@ -81,7 +75,7 @@ void CinderProjectTESTINGApp::draw()
     gl::draw(_background);
 
     gl::enableAlphaBlending();
-        //Width  Height
+        //Width Height
     gl::draw( _buildingImage, _Building[0] );
     gl::draw( _buildingImage, _Building[1] );
     gl::draw( _buildingImage, _Building[2] );
