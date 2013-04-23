@@ -12,7 +12,9 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-static Vec2f _centerBase = Vec2f(275, 400);
+static double _mouseX;
+static Vec2f _centerBase = Vec2f (275, 400);
+
 static Vec2f _Building1 = Vec2f( 50.0f, 487.0f );
 static Vec2f _Building2 = Vec2f( 200.0f, 487.0f );
 static Vec2f _Building3 = Vec2f( 510.0f, 487.0f );
@@ -64,6 +66,7 @@ void CinderProjectTESTINGApp::mouseDown( MouseEvent event )
    _missileStartHolder.x = 300.0;
    _missileStartHolder.y = 400.0;
    TurretMissile(event.getPos(), _missileStartHolder);
+   _mouseX = event.getX();
    } 
 }
 
@@ -85,6 +88,8 @@ void CinderProjectTESTINGApp::update()
 
 void CinderProjectTESTINGApp::draw()
 {
+    static Vec2f _linePoint = Vec2f( _mouseX, 350);
+    gl::drawLine(_linePoint, _centerBase);
     
     gl::drawSolidCircle(_centerBase, 20);
     
