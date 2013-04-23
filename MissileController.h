@@ -18,7 +18,7 @@ public:
 	void addMissiles(int);
 	void removeMissiles(int);
 	void addTurretMissile (int);
-	void removeTurretMissile (int);
+	//void removeTurretMissile (int);
 
 	std::list <Missile> _Missile;
 	std::list <TurretMissile> _TurretMissile;
