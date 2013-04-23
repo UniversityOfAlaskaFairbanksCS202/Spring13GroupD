@@ -19,24 +19,6 @@ TurretMissile::TurretMissile(Vec2f cursorLoc, Vec2f rect)
 	_mPath = _cursorLoc - _mLocation;
 }
 
-// mouseMove + mouseDrag allow the turret to follow cursor //
-// gets mouse location //
-void Turret::mouseMove(MouseEvent event) 
-{
-		_cursorLoc = event.getPos();
-}
-
-
-// on left click, FIRE MISSILE //
-void TurretMissile::mouseDown( event ) 
-{
-	if ( event.isLeft()) {
-		_missileStartHolder.x = 300.0;
-		_missileStartHolder.y = 400.0;
-		TurretMissile(_mLocation, _missileStartHolder);
-		}
-}
-
 // moves the missile, checks for collision //	
 void TurretMissile::update()
 {
