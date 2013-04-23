@@ -9,15 +9,15 @@ public:
 	float _velocity;
 	float _radius;
 	bool _health;
+	
+	ci::Vec2f _missileStartHolder;
 
 	TurretMissile(Vec2f, Vec2f);
 	
 	void update();
 	void draw();
 	bool collisionDetection();
-	
-	void mouseMove( MouseEvent );	
-	void mouseDown( MouseEvent );	
+
 };
 
 #endif
