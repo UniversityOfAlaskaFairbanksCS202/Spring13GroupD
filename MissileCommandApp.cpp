@@ -49,10 +49,12 @@ void CinderProjectTESTINGApp::setup()
     _buildingImage = gl::Texture( loadImage( loadResource(RES_BUILDING ) ) );
 }
 
+/*
 void CinderProjectTESTINGApp::mouseMove(MouseEvent event) 
 {
     TurretMissile._cursorLoc = event.getPos();
 }
+*/
 
 void CinderProjectTESTINGApp::mouseDown( MouseEvent event )
 {
@@ -60,7 +62,7 @@ void CinderProjectTESTINGApp::mouseDown( MouseEvent event )
     {
    _missileStartHolder.x = 300.0;
    _missileStartHolder.y = 400.0;
-   TurretMissile(_mLocation, _missileStartHolder);
+   TurretMissile(event.getPos(), _missileStartHolder);
    } 
 }
 
