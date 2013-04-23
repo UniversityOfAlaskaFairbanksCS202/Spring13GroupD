@@ -48,14 +48,24 @@ void CinderProjectTESTINGApp::setup()
     _background = gl::Texture( loadImage( loadResource(RES_BACKGROUND ) ) );
     _buildingImage = gl::Texture( loadImage( loadResource(RES_BUILDING ) ) );
 }
-/*void CinderProjectTESTINGApp::mouseDown( MouseEvent event )
+
+void CinderProjectTESTINGApp::mouseMove(MouseEvent event) 
 {
-    if( event.isLeft())
-    {
-        _MissileController.addMissiles(1);
-    }
+    TurretMissile._cursorLoc = event.getPos();
 }
-*/
+
+void CinderProjectTESTINGApp::mouseDown( MouseEvent event )
+{
+    if ( event.isLeft()) 
+    {
+   _missileStartHolder.x = 300.0;
+   _missileStartHolder.y = 400.0;
+   TurretMissile(_mLocation, _missileStartHolder);
+   } 
+}
+
+
+
 void CinderProjectTESTINGApp::update()
 {
     if(count < level1Missiles)
