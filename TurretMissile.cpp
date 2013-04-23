@@ -7,12 +7,10 @@
 using namespace ci;
 
 // Turret Missile constructor called whenever there's a left click //
-TurretMissile::TurretMissile(Vec2f _cursorLoc, Vec2f rect) 
+TurretMissile::TurretMissile(Vec2f _cursorLoc, Vec2f Start) 
 {
-  _health = true; 
-	_begLocation = Vec2f ( rect.x + 2.5, rect.y + 2.5);
-	_mLocation = begLocation;
-	
+  	_health = true; 
+	_mLocation = Start;
 	_velocity = 2.0f;
 	_radius = 3.0f;
 }
