@@ -26,6 +26,8 @@ void TurretMissile::update()
 		_radius = 100.0;
 		_health = false;
 	}	
+	if (_health = false)
+		MissileController.removemissile();
 }
 
 // draws missile path, if a hit, explosion!! //
