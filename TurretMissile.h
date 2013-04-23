@@ -3,8 +3,8 @@
 class TurretMissile
 {
 public:
-  ci::Vec2f _location;
-	ci::Vec2f _dirToCursor;
+  	ci::Vec2f _mLocation;
+	ci::Vec2f _cursorLoc;
 	ci::Vec2f _mPath;
 	float _velocity;
 	float _radius;
@@ -17,7 +17,6 @@ public:
 	bool collisionDetection();
 	
 	void mouseMove( MouseEvent );	
-	void mouseDrag( MouseEvent )
 	void mouseDown( MouseEvent );	
 };
 
