@@ -12,7 +12,7 @@
 class Turret {
 public:
 // CLASS VARIABLES //
- float _startPosition;	   // position is at the top of Turret Base //
+ 	ci::Vec2f _startPosition;	   // position is at the top of Turret Base //
 	
 	
 // CLASS FUNCTIONS //
