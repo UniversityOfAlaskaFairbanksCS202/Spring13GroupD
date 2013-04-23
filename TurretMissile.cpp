@@ -15,8 +15,6 @@ TurretMissile::TurretMissile(Vec2f cursorLoc, Vec2f rect)
 	
 	_velocity = 2.0f;
 	_radius = 3.0f;
-	
-	_mPath = _cursorLoc - _mLocation;
 }
 
 // moves the missile, checks for collision //	
