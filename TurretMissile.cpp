@@ -22,7 +22,7 @@ TurretMissile::TurretMissile(Vec2f cursorLoc, Vec2f rect)
 // moves the missile, checks for collision //	
 void TurretMissile::update()
 {
-		_mlocation += _cursorLoc * _velocity;
+		_mLocation += _cursorLoc * _velocity;
 	if(collisionDetection())
 	{
 		_radius = 100.0;
