@@ -12,8 +12,7 @@
 class Turret {
 public:
 // CLASS VARIABLES //
-  ci::Vec2f _recPos( 275, 410 ); 
-	ci::Vec2f _recSize();		   
+ float _startPosition;	   // position is at the top of Turret Base //
 	
 	
 // CLASS FUNCTIONS //
