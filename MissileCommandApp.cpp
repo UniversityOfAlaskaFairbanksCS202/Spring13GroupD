@@ -12,6 +12,7 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
+static Vec2f _centerBase = Vec2f(275, 400);
 static Vec2f _Building1 = Vec2f( 50.0f, 487.0f );
 static Vec2f _Building2 = Vec2f( 200.0f, 487.0f );
 static Vec2f _Building3 = Vec2f( 510.0f, 487.0f );
@@ -84,6 +85,9 @@ void CinderProjectTESTINGApp::update()
 
 void CinderProjectTESTINGApp::draw()
 {
+    
+    gl::drawSolidCircle(_centerBase, 20);
+    
     gl::draw(_background);
 
     gl::enableAlphaBlending();
