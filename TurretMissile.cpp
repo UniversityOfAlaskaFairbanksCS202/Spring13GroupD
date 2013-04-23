@@ -31,7 +31,9 @@ void Turret::mouseMove(MouseEvent event)
 void TurretMissile::mouseDown( event ) 
 {
 	if ( event.isLeft()) {
-		TurretMissile(_mLocation, _rect);
+		_missileStartHolder.x = 300.0;
+		_missileStartHolder.y = 400.0;
+		TurretMissile(_mLocation, _missileStartHolder);
 		}
 }
 
