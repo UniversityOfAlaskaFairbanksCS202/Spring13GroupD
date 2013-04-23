@@ -10,5 +10,5 @@ gl::drawOpenCircle(275, 400)
 
 // top side points have their own postion as well as bottom two //
 // 
-gl::drawSolidRect(_recPos, _recSize);
+gl::drawOpenCircle(_startPosition.x, _startPosition.y, 10);
 }
