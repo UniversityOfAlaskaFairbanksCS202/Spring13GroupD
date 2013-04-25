@@ -22,18 +22,21 @@ void MissileController::update()
 
         }
         else 
+	{
+		if (_Missile.size()>0)
 		{
-			if (_Missile.size()>0)
-        
-			{
-				p->update();
-			}
-			else
-			{
-				_Missile.erase(p);
-			}
+			p->update();
 		}
+			
+		else
+		{
+			_Missile.erase(p);
 		}
+	}
+	
+	if (_Missile.size() == 0)
+			return;
+    }
 
 }
 
