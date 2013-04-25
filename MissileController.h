@@ -11,17 +11,17 @@
 class MissileController
 {
 public:
-	friend class TurretMissile;
-	MissileController();
-	void update();
-	void draw();
-	void addMissiles(int);
-	void removeMissiles(int);
-	void addTurretMissile (int);
-	//void removeTurretMissile (int);
+friend class TurretMissile;
+MissileController();
+void update();
+void draw();
+void addMissiles(int);
+void removeMissiles(int);
+void addTurretMissile (int);
+//void removeTurretMissile (int);
 
-	std::list <Missile> _Missile;
-	std::list <TurretMissile> _TurretMissile;
+std::list <Missile> _Missile;
+std::list <TurretMissile> _TurretMissile;
 };
 
 
