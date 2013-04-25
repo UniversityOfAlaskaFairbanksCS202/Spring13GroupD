@@ -6,6 +6,7 @@
 
 #include "Missile.h"
 #include "MissileController.h"
+#include "TurretMissile.h"
 
 
 using namespace ci;
@@ -14,7 +15,7 @@ using namespace std;
 
 static double _mouseX;
 static Vec2f _centerBase = Vec2f (275, 400);
-
+static Vec2f _missileStartHolder = Vec2f (300, 400);
 static Vec2f _Building1 = Vec2f( 50.0f, 487.0f );
 static Vec2f _Building2 = Vec2f( 200.0f, 487.0f );
 static Vec2f _Building3 = Vec2f( 510.0f, 487.0f );
@@ -25,9 +26,9 @@ static int level1Missiles = 10;
 
 class CinderProjectTESTINGApp : public AppBasic {
 public:
-    void prepareSettings( Settings *settings );
+void prepareSettings( Settings *settings );
 void setup();
-//void mouseDown( MouseEvent event );
+void mouseDown( MouseEvent event );
 void update();
 void draw();
     gl::Texture _buildingImage;
@@ -53,21 +54,21 @@ void CinderProjectTESTINGApp::setup()
 }
 
 /*
-void CinderProjectTESTINGApp::mouseMove(MouseEvent event) 
+void CinderProjectTESTINGApp::mouseMove(MouseEvent event)
 {
-    TurretMissile._cursorLoc = event.getPos();
+TurretMissile._cursorLoc = event.getPos();
 }
 */
 
 void CinderProjectTESTINGApp::mouseDown( MouseEvent event )
 {
-    if ( event.isLeft()) 
+    if ( event.isLeft())
     {
-   _missileStartHolder.x = 300.0;
-   _missileStartHolder.y = 400.0;
-   TurretMissile(event.getPos(), _missileStartHolder);
+    TurretMissile currentMissile;
+   currentMissile=TurretMissile(event.getPos(), _missileStartHolder);
    _mouseX = event.getX();
-   } 
+   currentMissile.draw();
+   }
 }
 
 
