@@ -62,12 +62,12 @@ bool TurretMissile::collisionDetection()
     
     left1 = static_cast<int>(_location.x);
     left2 = static_cast<int>(_cursorLoc.x);
-    right1 = static_cast<int>(_location.x) + 10;
-    right2 = static_cast<int>(_cursorLoc.x) + 10;
+    right1 = static_cast<int>(_location.x) + 5;
+    right2 = static_cast<int>(_cursorLoc.x) + 5;
     top1 = static_cast<int>(_location.y);
     top2 = static_cast<int>(_cursorLoc.y);
-    bottom1 = static_cast<int>(_location.y) + 10;
-    bottom2 = static_cast<int>(_cursorLoc.y) + 10;
+    bottom1 = static_cast<int>(_location.y) + 5;
+    bottom2 = static_cast<int>(_cursorLoc.y) + 5;
     
     if (bottom1 < top2)
         return(false);

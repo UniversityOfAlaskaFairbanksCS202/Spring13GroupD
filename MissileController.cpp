@@ -60,6 +60,20 @@ void MissileController::update()
 			return;*/
     }
     
+    for( list<TurretMissile>::iterator Q = _TurretMissile.begin(); Q != _TurretMissile.end(); ++Q)
+    {
+        if(Q->_velocity == 0.0)
+        {
+            for( list<Missile>::iterator p = _Missile.begin(); p != _Missile.end(); ++p)
+            {
+                if (collisionDetection(Q->_radius, Q->_location, p->_location))
+                {
+                    p = _Missile.erase(p);
+                }
+            }
+        }
+    }
+    
 }
 
 
@@ -86,7 +100,7 @@ void MissileController::addMissiles(int numMissiles)
 	}
 }
 
-void MissileController::addTurretMissile(int numMissiles, ci::Vec2f mousePos, ci::Vec2f startHolder)
+void MissileController::addTurretMissile(int numMissiles, Vec2f mousePos, Vec2f startHolder)
 {
     for( int i = 0; i< numMissiles; ++i)
 	{
@@ -108,6 +122,35 @@ void MissileController::removeTurretMissile(int numMissiles)
     {
         _TurretMissile.pop_back();
     }
+}
+
+bool MissileController::collisionDetection(int radius, Vec2f turretMissileLoc, Vec2f missileLoc)
+{
+    int left1, left2;
+    int right1, right2;
+    int top1, top2;
+    int bottom1, bottom2;
+    
+    left1 = static_cast<int>(turretMissileLoc.x) - radius;
+    left2 = static_cast<int>(missileLoc.x);
+    right1 = static_cast<int>(turretMissileLoc.x) + radius;
+    right2 = static_cast<int>(missileLoc.x);
+    top1 = static_cast<int>(turretMissileLoc.y) - radius;
+    top2 = static_cast<int>(missileLoc.y);
+    bottom1 = static_cast<int>(turretMissileLoc.y) + radius;
+    bottom2 = static_cast<int>(missileLoc.y);
+    
+    if (bottom1 < top2)
+        return(false);
+    if (top1 > bottom2)
+        return(false);
+    
+    if (right1 < left2)
+        return(false);
+    if (left1 > right2)
+        return(false);
+    
+    return(true);
 }
 
 
