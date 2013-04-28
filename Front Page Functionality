@@ -1,0 +1,29 @@
+// Front Page Functionality
+
+void MISSIONCONTROLFINALApp::keyDown ( KeyEvent event)
+{
+    switch (event.getChar() ) 
+    {
+        case '1':
+            console() << "Beginner "; // Put Code for Beginner's Level of Game
+            break;
+        case '2':
+            console() << "Intermediate "; // Put Code for Intermediate Level of Game
+            break;
+        case '3':
+            console() << "Advanced "; // Put Code for Advanced Level of Game
+            break;
+        case '4':
+            console() << "Brandon "; // Put Code for Brandon's Level of Game
+            break;
+            
+        default:
+            break;
+    }
+    
+    if( event.getCode() == KeyEvent::KEY_ESCAPE )
+    {
+        console() << "TERMINATE PROGRAM "; // Put Code to Terminate Program
+    }
+    
+}
