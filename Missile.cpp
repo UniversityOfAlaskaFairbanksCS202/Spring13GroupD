@@ -6,6 +6,7 @@
 #include "Missile.h"
 #include "TurretMissile.h"
 #include "globals.h"
+#include "ScoringEngine.h"
 
 using namespace ci;
 
