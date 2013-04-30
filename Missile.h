@@ -9,21 +9,24 @@
 class Missile
 {
 public:
-Missile();
-void update();
-void draw();
-bool collisionDetection();
+    Missile();
+    void update();
+    void draw();
+    bool collisionDetection();
     
     
-ci::Vec2f    _buildingLoc;
-ci::Vec2f	_location;
+    ci::Vec2f    _buildingLoc;
+    ci::Vec2f	_location;
     ci::Vec2f _dirToBuilding;
     ci::Vec2f _begLocation;
-float	_velocity;
-float _radius;
+    float	_velocity;
+    int _radius;
     bool _health;
-    
+    int _lifespan;
+    int _age;
 
+	int _buildingNum;
+    
 };
 
 #endif
