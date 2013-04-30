@@ -4,6 +4,7 @@
 #include "MissileController.h"
 #include "Missile.h"
 #include "TurretMissile.h"
+#include "ScoringEngine.h"
 
 
 using namespace ci;
@@ -68,7 +69,9 @@ void MissileController::update()
             {
                 if (collisionDetection(Q->_radius, Q->_location, p->_location) && p->_velocity != 0.0) //Changed this
                 {
+                    ScoringEngine player;
                     p = _Missile.erase(p);
+                    player.updateScore();
 					
 					if (_Missile.size() == 0 || _TurretMissile.size())
 						return;
