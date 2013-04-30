@@ -20,12 +20,14 @@ static MissileController _MissileController;
 
 Missile::Missile()
 {
+     ScoringEngine player;
+     float velocity = player.getVelocity();
      _health = true;
     _begLocation = Vec2f (Rand::randFloat(800.0), 0.0f);
     _location = _begLocation;
     _buildingNum = Rand::randInt(0,4);
     _buildingLoc = _Building[_buildingNum] + centerCorrection;
-    _velocity = 1.0f;
+    _velocity = velocity;
     _radius = 0;
     _dirToBuilding = _buildingLoc - _location;
     _dirToBuilding.safeNormalize();
