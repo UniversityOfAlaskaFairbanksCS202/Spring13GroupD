@@ -49,11 +49,6 @@ void MissileController::update()
             {
                 Q->update();
             }
-			
-            else
-            {
-                _TurretMissile.erase(Q);
-            }
         }
         
         /*if (_TurretMissile.size() == 0)
@@ -66,7 +61,7 @@ void MissileController::update()
         {
             for( list<Missile>::iterator p = _Missile.begin(); p != _Missile.end(); ++p)
             {
-                if (collisionDetection(Q->_radius, Q->_location, p->_location))
+                if (collisionDetection(Q->_radius, Q->_location, p->_location) && p->_velocity != 0.0)
                 {
                     p = _Missile.erase(p);
                 }
@@ -82,13 +77,13 @@ void MissileController::draw()
     for( list<Missile>::iterator p = _Missile.begin(); p != _Missile.end(); ++p)
     {
         p->draw();
-        
     }
     
     for( list<TurretMissile>::iterator Q = _TurretMissile.begin(); Q != _TurretMissile.end(); ++Q)
     {
+        gl::color(0,255,0);
         Q->draw();
-        
+        gl::color(255,255,255);
     }
 }
 

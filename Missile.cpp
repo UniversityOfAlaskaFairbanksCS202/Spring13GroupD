@@ -5,6 +5,7 @@
 #include "MissileController.h"
 #include "Missile.h"
 #include "TurretMissile.h"
+#include "Globals.h"
 
 using namespace ci;
 
@@ -15,6 +16,8 @@ static Vec2f _Building4 = Vec2f( 660.0f, 487.0f );
 static Vec2f _Building[4] = {_Building1, _Building2, _Building3, _Building4};
 static Vec2f centerCorrection = Vec2f (40.0f, 40.0f);
 
+
+
 static MissileController _MissileController;
 
 Missile::Missile()
@@ -22,7 +25,8 @@ Missile::Missile()
     _health = true;
     _begLocation = Vec2f (Rand::randFloat(800.0), 0.0f);
     _location = _begLocation;
-    _buildingLoc = _Building[Rand::randInt(0,5)] + centerCorrection;
+    _buildingNum = Rand::randInt(0,4);
+    _buildingLoc = _Building[_buildingNum] + centerCorrection;
     _velocity = 1.0f;
     _radius = 0;
     _dirToBuilding = _buildingLoc - _location;
@@ -45,6 +49,10 @@ void Missile::update()
         if (_age > _lifespan)
         {
             _health = false;
+            if(_structure[_buildingNum] < 3)
+            {
+                _structure[_buildingNum]++;
+            }
         }
     }
 }

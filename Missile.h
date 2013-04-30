@@ -25,6 +25,7 @@ public:
     int _lifespan;
     int _age;
     
+    int _buildingNum;
 };
 
 #endif
