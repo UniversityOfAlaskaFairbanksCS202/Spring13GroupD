@@ -70,7 +70,7 @@ void MissileController::update()
                 {
                     p = _Missile.erase(p);
 					
-					if (_Missile.size() == 0)
+					if (_Missile.size() == 0 || _TurretMissile.size())
 						return;
                 }
             }
