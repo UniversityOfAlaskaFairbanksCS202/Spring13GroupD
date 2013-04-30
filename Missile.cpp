@@ -1,8 +1,11 @@
-#include "Missile.h"
 #include "cinder/Rand.h"
 #include "cinder/gl/gl.h"
 #include "cinder/app/AppBasic.h"
+
 #include "MissileController.h"
+#include "Missile.h"
+#include "TurretMissile.h"
+#include "globals.h"
 
 using namespace ci;
 
@@ -17,39 +20,48 @@ static MissileController _MissileController;
 
 Missile::Missile()
 {
-    _health = true;
+     _health = true;
     _begLocation = Vec2f (Rand::randFloat(800.0), 0.0f);
-_location = _begLocation;
-    _buildingLoc = _Building[Rand::randInt(0,4)] + centerCorrection;
-_velocity = 1.0f;
-_radius = 3.0f;
+    _location = _begLocation;
+    _buildingNum = Rand::randInt(0,4);
+    _buildingLoc = _Building[_buildingNum] + centerCorrection;
+    _velocity = 1.0f;
+    _radius = 0;
     _dirToBuilding = _buildingLoc - _location;
     _dirToBuilding.safeNormalize();
-
+    _lifespan = 60;
+    _age = 0;
 }
 
 void Missile::update()
 {
-_location += _dirToBuilding * _velocity;
+     _location += _dirToBuilding * _velocity;
     if(collisionDetection())
     {
-        _radius = 100.0;
-        _health = false;
-		_MissileController.update();
-        
+        _velocity = 0.0;
     }
-	
-	/*if(_health == false)
-	{
-		_MissileController.removeMissiles(1);
-	
-	}*/
+    if (_velocity == 0.0)
+    {
+        _age ++;
+        _radius++;
+        if (_age > _lifespan)
+        {
+            _health = false;
+            if(_structure[_buildingNum] < 3)
+            {
+                _structure[_buildingNum]++;
+            }
+        }
+    }
 }
 
 void Missile::draw()
 {
-    gl::drawLine(_begLocation, _location);
-    if (!_health)
+    if (_velocity != 0.0)
+    {
+        gl::drawLine(_begLocation, _location);
+    }
+    else
     {
         gl::drawSolidCircle ( _location, _radius);
     }
@@ -58,36 +70,31 @@ void Missile::draw()
 bool Missile::collisionDetection()
 {
     int left1, left2;
-int right1, right2;
-int top1, top2;
-int bottom1, bottom2;
+    int right1, right2;
+    int top1, top2;
+    int bottom1, bottom2;
     
-left1 = static_cast<int>(_location.x);
-left2 = static_cast<int>(_buildingLoc.x);
-right1 = static_cast<int>(_location.x) + 10;
-right2 = static_cast<int>(_buildingLoc.x) + 10;
-top1 = static_cast<int>(_location.y);
-top2 = static_cast<int>(_buildingLoc.y);
-bottom1 = static_cast<int>(_location.y) + 10;
-bottom2 = static_cast<int>(_buildingLoc.y) + 10;
+    left1 = static_cast<int>(_location.x);
+    left2 = static_cast<int>(_buildingLoc.x);
+    right1 = static_cast<int>(_location.x) + 10;
+    right2 = static_cast<int>(_buildingLoc.x) + 10;
+    top1 = static_cast<int>(_location.y);
+    top2 = static_cast<int>(_buildingLoc.y);
+    bottom1 = static_cast<int>(_location.y) + 10;
+    bottom2 = static_cast<int>(_buildingLoc.y) + 10;
     
-if (bottom1 < top2)
+    if (bottom1 < top2)
         return(false);
-if (top1 > bottom2)
-        return(false);
-    
-if (right1 < left2)
-        return(false);
-if (left1 > right2)
+    if (top1 > bottom2)
         return(false);
     
-return(true);
+    if (right1 < left2)
+        return(false);
+    if (left1 > right2)
+        return(false);
+    
+    return(true);
     
     
     
 }
-
-
-
-
-
