@@ -1,5 +1,5 @@
-#ifndef MISSILE_H_INCLUDED
-#define MISSILE_H_INCLUDED
+#ifndef MISSILECONTROLLER_H
+#define MISSILECONTROLLER_H
 
 
 #include "cinder/Channel.h"
@@ -7,21 +7,23 @@
 #include "TurretMissile.h"
 #include <list>
 
+using namespace ci;
 
 class MissileController
 {
 public:
-friend class TurretMissile;
 MissileController();
 void update();
 void draw();
 void addMissiles(int);
 void removeMissiles(int);
-void addTurretMissile (int);
-//void removeTurretMissile (int);
-
+void addTurretMissile (int, Vec2f, Vec2f);
+void removeTurretMissile (int);
+    
 std::list <Missile> _Missile;
 std::list <TurretMissile> _TurretMissile;
+    
+    bool collisionDetection(int radius, Vec2f turretMissileLoc, Vec2f missileLoc);
 };
 
 
