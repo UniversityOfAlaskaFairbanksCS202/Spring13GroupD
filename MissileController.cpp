@@ -33,7 +33,7 @@ void MissileController::update()
         }
         
         if (_Missile.size() == 0)
-    		return;
+     return;
     
     }
     
@@ -58,7 +58,7 @@ void MissileController::update()
         }
         
         if (_TurretMissile.size() == 0)
-			return;
+return;
     }
     
     for( list<TurretMissile>::iterator Q = _TurretMissile.begin(); Q != _TurretMissile.end(); ++Q)
@@ -72,9 +72,9 @@ void MissileController::update()
                     ScoringEngine player;
                     p = _Missile.erase(p);
                     player.updateScore();
-					
-					if (_Missile.size() == 0 || _TurretMissile.size())
-						return;
+
+if (_Missile.size() == 0 || _TurretMissile.size())
+return;
                 }
             }
         }
@@ -146,7 +146,7 @@ bool MissileController::collisionDetection(int radius, Vec2f turretMissileLoc, V
     bottom1 = static_cast<int>(turretMissileLoc.y) + radius;
     bottom2 = static_cast<int>(missileLoc.y);
     
-    if (bottom1 < top2)
+   if (bottom1 < top2)
         return(false);
     if (top1 > bottom2)
         return(false);
@@ -158,4 +158,3 @@ bool MissileController::collisionDetection(int radius, Vec2f turretMissileLoc, V
     
     return(true);
 }
-
