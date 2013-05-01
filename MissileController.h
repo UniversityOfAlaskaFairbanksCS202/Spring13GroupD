@@ -12,18 +12,18 @@ using namespace ci;
 class MissileController
 {
 public:
-MissileController();
-void update();
-void draw();
-void addMissiles(int);
-void removeMissiles(int);
-void addTurretMissile (int, Vec2f, Vec2f);
-void removeTurretMissile (int);
+    MissileController();
+	void update();
+	void draw();
+	void addMissiles(int);
+	void removeMissiles(int);
+	void addTurretMissile (int, Vec2f, Vec2f);
+	void removeTurretMissile (int);
     
-std::list <Missile> _Missile;
-std::list <TurretMissile> _TurretMissile;
+	std::list <Missile> _Missile;
+	std::list <TurretMissile> _TurretMissile;
     
-    bool collisionDetection(int radius, Vec2f turretMissileLoc, Vec2f missileLoc);
+   bool collisionDetection(int radius, Vec2f turretMissileLoc, Vec2f missileLoc);
 };
 
 
