@@ -26,7 +26,7 @@ Missile::Missile()
      _health = true;
     _begLocation = Vec2f (Rand::randFloat(800.0), 0.0f);
     _location = _begLocation;
-    _buildingNum = Rand::randInt(0,4);
+    _buildingNum = Rand::randInt(0,5);
     _buildingLoc = _Building[_buildingNum] + centerCorrection;
     _velocity = velocity;
     _radius = 0;
@@ -53,7 +53,10 @@ void Missile::update()
             if(_structure[_buildingNum] < 3)
             {
                 _structure[_buildingNum]++;
+     			_eog++;
             }
+			else
+				return;
         }
     }
 }
