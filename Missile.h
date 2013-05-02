@@ -4,29 +4,24 @@
 #include "cinder/Channel.h"
 #include "cinder/Vector.h"
 
-#include <vector>
-
 class Missile
 {
 public:
-    Missile();
-    void update();
-    void draw();
-    bool collisionDetection();
+    Missile();                  //default constructor
+    void update();              //updates the missile location and missile blast
+    void draw();                //decides to draw the missile line or blast circle
+    bool collisionDetection();  //detects if missile hits the building
     
-    
-    ci::Vec2f _buildingLoc;
-    ci::Vec2f    _location;
-    ci::Vec2f _dirToBuilding;
-    ci::Vec2f _begLocation;
-    float	_velocity;
-    int _radius;
-    bool _health;
-    int _lifespan;
-    int _age;
-
-int _buildingNum;
-    
+    ci::Vec2f _buildingLoc;     //holds location of building
+    ci::Vec2f _location;        //holds location that gets updated
+    ci::Vec2f _dirToBuilding;   //holds normalized direction to the building
+    ci::Vec2f _begLocation;     //holds random beginning location of missile
+    float	  _velocity;        //holds the velocity of the missile
+    int       _radius;  
+    bool      _health;
+    int       _lifespan;        //the lifespan of the blast radius
+    int       _age;             //gets incremented until it reaches the lifespan
+    int       _buildingNum;     //holds the random building number
 };
 
 #endif
