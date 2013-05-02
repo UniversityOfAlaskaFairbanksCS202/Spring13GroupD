@@ -17,7 +17,7 @@ using namespace ci;
 using namespace ci::app;
 using namespace std;
 
-//static double _mouseX;
+
 static Vec2f _centerBase = Vec2f (275, 400);
 
 static Vec2f _Building1 = Vec2f( 50.0f, 487.0f );
@@ -27,21 +27,21 @@ static Vec2f _Building4 = Vec2f( 660.0f, 487.0f );
 static Vec2f _Building[4] = {_Building1, _Building2, _Building3, _Building4};
 static Vec2f _missileStartHolder = Vec2f( 390.0f, 500.0f );
 
-static int level1Missiles = 100;
+
 
 class CinderProjectTESTINGApp : public AppBasic {
 public:
     void prepareSettings( Settings *settings );
     void setup();
     void mouseDown( MouseEvent event );
-    void keyDown( KeyEvent event); //Added this
+    void keyDown( KeyEvent event); 
     void update();
     void draw();
-    gl::Texture _buildingImage1; //Changed this
-gl::Texture _buildingImage2; //Changed this
-gl::Texture _buildingImage3; //Changed this
-gl::Texture _buildingImage4; //Changed this
-gl::Texture _buildingImage[4]; //Changed this
+    gl::Texture _buildingImage1; 
+gl::Texture _buildingImage2; 
+gl::Texture _buildingImage3; 
+gl::Texture _buildingImage4; 
+gl::Texture _buildingImage[4]; 
 gl::Texture _background;
 gl::Texture _frontPage;
 gl::Texture _GameOver;
@@ -59,7 +59,7 @@ void CinderProjectTESTINGApp::prepareSettings( Settings *settings )
     settings->setFrameRate( 60.0f );
 }
 
-void CinderProjectTESTINGApp::setup() //Changed this whole section
+void CinderProjectTESTINGApp::setup() 
 {
     _background = gl::Texture( loadImage( loadResource(RES_BACKGROUND ) ) );
     _buildingImage1 = gl::Texture( loadImage( loadResource(RES_BUILDING1 ) ) );
@@ -83,16 +83,13 @@ void CinderProjectTESTINGApp::mouseDown( MouseEvent event )
 	if ( event.isLeft())
     {
         _MissileController.addTurretMissile(1, event.getPos(), _missileStartHolder);
-        //_mouseX = event.getX();
+        
     }
 }
 
-void CinderProjectTESTINGApp::keyDown( KeyEvent event ) //Added all this
+void CinderProjectTESTINGApp::keyDown( KeyEvent event ) 
 {
-    if (event.getChar() == '6')
-    {
-        _MissileController.addMissiles(1);
-    }
+    
     if (event.getChar() == '9')
     {
         _structure[0] = 0;
@@ -120,47 +117,60 @@ void CinderProjectTESTINGApp::keyDown( KeyEvent event ) //Added all this
         _choice = 4;
 		ScoringEngine player(4);
     }
+	if (event.getCode() == KeyEvent::KEY_ESCAPE)
+	{
+		quit();
+	}
 }
 
 
 void CinderProjectTESTINGApp::update()
 {
-    if(count < level1Missiles)
+	ScoringEngine player;
+	if(count < player.getMissiles())
     {
         if(app::getElapsedFrames()%60 == 59 && (_choice >0 && _choice<5)) //once a second. 60 frames a second, one time it is 60
         {
             _MissileController.addMissiles(1);
             count++;
-        }
+			
+		}
+		
     }
+	if(count == player.getMissiles())
+		{
+			player.updateLevel();
+		}
     _MissileController.update();
 }
 
 void CinderProjectTESTINGApp::draw()
 {
 
-    if (_choice < 1 || _choice > 5) //Changed it
+    if (_choice < 1 || _choice > 5) 
 	{
 		gl::enableAlphaBlending();
 		gl::draw(_frontPage);
-		gl::disableAlphaBlending();
-	}   //To here
+		gl::disableAlphaBlending(); 
+	}   
 
 	else if (_eog ==12)
 	{
+		
+		ScoringEngine player;
 		gl::enableAlphaBlending();
 		gl::draw(_GameOver);
-		gl::drawStringCentered("Your Score:", Vec2f(400.0f,200.0f),ColorA(1,0,0,1),Font("Arial", 90));
+		gl::drawStringCentered( "Your Score " +player.endingscore, Vec2f(400.0f,200.0f),ColorA(1,0,0,1),Font("Arial", 90));
 		gl::disableAlphaBlending();
 	}
 	else if (!(_eog >= 12))
 	{
 	gl::draw(_background);
     gl::enableAlphaBlending();
-    gl::draw( _buildingImage[_structure[0]], _Building[0] ); //changed this
-    gl::draw( _buildingImage[_structure[1]], _Building[1] );//changed this
-    gl::draw( _buildingImage[_structure[2]], _Building[2] );//changed this
-    gl::draw( _buildingImage[_structure[3]], _Building[3] );//changed this
+    gl::draw( _buildingImage[_structure[0]], _Building[0] ); 
+    gl::draw( _buildingImage[_structure[1]], _Building[1] );
+    gl::draw( _buildingImage[_structure[2]], _Building[2] );
+    gl::draw( _buildingImage[_structure[3]], _Building[3] );
     gl::disableAlphaBlending();
     
     _MissileController.draw();
