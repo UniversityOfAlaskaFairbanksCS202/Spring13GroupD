@@ -16,7 +16,7 @@ public:
     
     
     ci::Vec2f _buildingLoc;
-    ci::Vec2f	_location;
+    ci::Vec2f    _location;
     ci::Vec2f _dirToBuilding;
     ci::Vec2f _begLocation;
     float	_velocity;
