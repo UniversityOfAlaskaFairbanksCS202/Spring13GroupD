@@ -15,7 +15,7 @@ public:
     bool collisionDetection();
     
     
-    ci::Vec2f    _buildingLoc;
+    ci::Vec2f _buildingLoc;
     ci::Vec2f	_location;
     ci::Vec2f _dirToBuilding;
     ci::Vec2f _begLocation;
@@ -25,7 +25,7 @@ public:
     int _lifespan;
     int _age;
 
-	int _buildingNum;
+int _buildingNum;
     
 };
 
