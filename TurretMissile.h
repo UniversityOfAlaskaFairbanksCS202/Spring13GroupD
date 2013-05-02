@@ -1,34 +1,29 @@
-#pragma once
 #ifndef TURRETMISSILE_H
 #define TURRETMISSILE_H
 
-
-#include "cinder/app/AppBasic.h"
-#include "cinder/gl/gl.h"
-#include "cinder/ImageIo.h"
-#include "cinder/gl/Texture.h"
-
+#include "cinder/Channel.h"
+#include "cinder/Vector.h"
 class TurretMissile
 {
 public:
-ci::Vec2f _mLocation;
-ci::Vec2f _cursorLoc;
-float _velocity;
-float _radius;
-bool _health;
-int m;
-
-
-TurretMissile(ci::Vec2f, ci::Vec2f);
-
+    TurretMissile();
+    TurretMissile(ci::Vec2f, ci::Vec2f);
 void update();
 void draw();
 bool collisionDetection();
-void removeMissile(int);
-TurretMissile();
-
+    
+   ci::Vec2f _location;
+ci::Vec2f _cursorLoc;
+    ci::Vec2f _dirToCursor;
+    ci::Vec2f _begLocation;
+    
+float _velocity;
+int _radius;
+    int _lifespan;
+    int _age;
+    
+bool _health;
+    
 };
-
-
 
 #endif
