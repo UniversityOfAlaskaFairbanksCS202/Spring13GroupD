@@ -1,6 +1,6 @@
 #include"ScoringEngine.h"
 
-int ScoringEngine::_score = 0;
+int ScoringEngine::_score = 0; //Sets all of our default values
 int ScoringEngine::_level=1;
 int ScoringEngine::_difficulty=0;
 float ScoringEngine::_sVelocity=0;
@@ -8,17 +8,17 @@ int ScoringEngine::_missiles=0;
 std::string ScoringEngine::endingscore ="0";
 
 
-ScoringEngine::ScoringEngine(){}
+ScoringEngine::ScoringEngine(){} //Does nothing by default (See what I did there hahahahaha)
 
 
 
-
-int ScoringEngine::getMissiles()
+int ScoringEngine::getMissiles() //Lets the world know how many missiles to launch.
 {
 return _missiles;
 }
 
-ScoringEngine::ScoringEngine(int choice)
+ScoringEngine::ScoringEngine(int choice) //It's given the int choice and converts that into the difficulty level thats desired.
+										 //It also sets all the values for the difficulty level.
 {
 _difficulty = choice;
 
@@ -66,17 +66,17 @@ _difficulty = choice;
 
 
 
-float ScoringEngine::getVelocity()
+float ScoringEngine::getVelocity() //Lets the missile know how fast to go
 {
 return _sVelocity;
 }
 
-int ScoringEngine::getLevel()
+int ScoringEngine::getLevel() //Lets the game know what level you're on.
 {
 	return _level;
 }
 
-void ScoringEngine::updateScore()
+void ScoringEngine::updateScore() //Updates the score. It has to convert it into a string to it can be displayed in draw.
 {
 _score += 50;
 convert<<_score;
@@ -84,7 +84,7 @@ endingscore = convert.str();
 }
 
 
-void ScoringEngine::updateLevel()
+void ScoringEngine::updateLevel() //Makes the game funner(harder) every time you go up another level.
 {
 ++_level;
 updateVelocity();
@@ -93,7 +93,7 @@ updateMissiles();
 }
 
 
-void ScoringEngine::updateVelocity()
+void ScoringEngine::updateVelocity() //CHanges the velocity every level.
 {
 switch(_difficulty)
 {
@@ -116,7 +116,7 @@ break;
 }
 
 
-void ScoringEngine::updateMissiles()
+void ScoringEngine::updateMissiles() //CHanges the number of missiles every level.
 {
 	switch(_difficulty)
 	{
