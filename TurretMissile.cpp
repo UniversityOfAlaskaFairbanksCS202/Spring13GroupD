@@ -1,75 +1,86 @@
 #include "TurretMissile.h"
-#include "Missile.h"
-#include "MissileController.h"
-
-#include "cinder/Rand.h"
 #include "cinder/gl/gl.h"
-#include "cinder/app/AppBasic.h"
 using namespace ci;
 
-using std::list;
-
-static Vec2f _missileStartHolder = Vec2f (300, 400);
-
-std::list <TurretMissile> _TurretMissile;
-
-
-// default Ctor, does absolutely nothing.
-TurretMissile::TurretMissile() {}
-
-// Turret Missile constructor called whenever there's a left click //
-TurretMissile::TurretMissile(Vec2f _cursorLoc, Vec2f Start)
+TurretMissile::TurretMissile()
 {
-_health = true;
-_mLocation = Start;
-_velocity = 2.0f;
-_radius = 3.0f;
+    
 }
 
-// moves the missile, checks for collision //
+TurretMissile::TurretMissile(ci::Vec2f cursor, ci::Vec2f start)
+{
+    _health = true;
+	_location = start;
+    _begLocation = _location;
+    _cursorLoc = cursor;
+    _dirToCursor = _cursorLoc - _location;
+    _dirToCursor.safeNormalize();
+	_velocity = 5.0f;
+	_radius = 3.0f;
+    _lifespan = 60;
+    _age = 0;
+}
+
 void TurretMissile::update()
 {
-_mLocation += _cursorLoc * _velocity;
+    _location += _dirToCursor * _velocity;
+    if(collisionDetection())
+    {
+        _velocity = 0.0;
+    }
+    if (_velocity == 0.0)
+    {
+        _age ++;
+        _radius++;
+        if (_age > _lifespan)
+        {
+            _health = false;
+        }
+    }
 
-if(collisionDetection())
-{
-_radius = 100.0;
-_health = false;
-}	
-if (_health = false)
-TurretMissile::removeMissile(m);
 }
 
-// draws missile path, if a hit, explosion!! //
 void TurretMissile::draw()
 {
-gl::drawLine(_missileStartHolder, _mLocation);
-if (!_health)
-{
-gl::drawSolidCircle (_mLocation, _radius);
-}
-for( list<TurretMissile>::iterator p = _TurretMissile.begin(); p != _TurretMissile.end(); ++p)
+    if (_velocity != 0.0)
     {
-        if (_TurretMissile.size()>0)
-		p->draw();
-
+        gl::drawLine(_begLocation, _location);
+    }
+    else
+    {
+        gl::drawSolidCircle ( _location, _radius);
     }
 }
 
-// Collision Detection //
+
 bool TurretMissile::collisionDetection()
 {
-/*if (_mLocation == Missile._location) {
-return true;
-}
-return false;*/
-	return false;
-}
-
-void TurretMissile::removeMissile( int numMissiles)
-{
-/*for ( int i = 0; i < numMissiles; ++i)
-{
-MissileController._TurretMissile.pop_back();
-}*/
+    int left1, left2;
+    int right1, right2;
+    int top1, top2;
+    int bottom1, bottom2;
+    
+    left1 = static_cast<int>(_location.x);
+    left2 = static_cast<int>(_cursorLoc.x);
+    right1 = static_cast<int>(_location.x) + 5;
+    right2 = static_cast<int>(_cursorLoc.x) + 5;
+    top1 = static_cast<int>(_location.y);
+    top2 = static_cast<int>(_cursorLoc.y);
+    bottom1 = static_cast<int>(_location.y) + 5;
+    bottom2 = static_cast<int>(_cursorLoc.y) + 5;
+    
+    if (bottom1 < top2)
+        return(false);
+    if (top1 > bottom2)
+        return(false);
+    
+    if (right1 < left2)
+        return(false);
+    if (left1 > right2)
+        return(false);
+    
+    return(true);
+    
+    
+    
 }
