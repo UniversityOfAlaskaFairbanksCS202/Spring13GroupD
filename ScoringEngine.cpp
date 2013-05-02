@@ -5,13 +5,12 @@ int ScoringEngine::_level=1;
 int ScoringEngine::_difficulty=0;
 float ScoringEngine::_sVelocity=0;
 int ScoringEngine::_missiles=0;
+std::string ScoringEngine::endingscore ="0";
+
 
 ScoringEngine::ScoringEngine(){}
 
-/*ScoringEngine::ScoringEngine(int choice)
-{
-_level = choice;
-}*/
+
 
 
 int ScoringEngine::getMissiles()
@@ -21,7 +20,7 @@ return _missiles;
 
 ScoringEngine::ScoringEngine(int choice)
 {
-_level = choice;
+_difficulty = choice;
 
 		switch (choice)
 		{
@@ -72,6 +71,10 @@ float ScoringEngine::getVelocity()
 return _sVelocity;
 }
 
+int ScoringEngine::getLevel()
+{
+	return _level;
+}
 
 void ScoringEngine::updateScore()
 {
@@ -85,6 +88,8 @@ void ScoringEngine::updateLevel()
 {
 ++_level;
 updateVelocity();
+updateMissiles();
+
 }
 
 
@@ -92,20 +97,36 @@ void ScoringEngine::updateVelocity()
 {
 switch(_difficulty)
 {
-case '1': { _sVelocity += 0.1f;
+case 1: { _sVelocity += 0.1f;
 break;
 }
 
-case '2': { _sVelocity += 0.3f;
+case 2: { _sVelocity += 0.3f;
 break;
 }
 
-case '3': { _sVelocity += 0.6f;
+case 3: { _sVelocity += 0.6f;
 break;
 }
 
-case '4': { _sVelocity += 5.0f;
+case 4: { _sVelocity += 5.0f;
 break;
 }
 }
+}
+
+
+void ScoringEngine::updateMissiles()
+{
+	switch(_difficulty)
+	{
+	case 1: _missiles += 5;
+		break;
+	case 2: _missiles += 10;
+		break;
+	case 3: _missiles += 15;
+		break;
+	case 4: _missiles += 100;
+		break;
+	}
 }
