@@ -2,27 +2,27 @@
 #include "cinder/gl/gl.h"
 using namespace ci;
 
-TurretMissile::TurretMissile()
+TurretMissile::TurretMissile()				// does nothing but needed //
 {
     
 }
 
-TurretMissile::TurretMissile(ci::Vec2f cursor, ci::Vec2f start)
+TurretMissile::TurretMissile(ci::Vec2f cursor, ci::Vec2f start)	// constructor that creates class object and gives initial instructions, chaged with updates //
 {
-    _health = true;
-	_location = start;
-    _begLocation = _location;
-    _cursorLoc = cursor;
-    _dirToCursor = _cursorLoc - _location;
-    _dirToCursor.safeNormalize();
-	_velocity = 5.0f;
-	_radius = 3.0f;
-    _lifespan = 60;
-    _age = 0;
+    _health = true;				// missile is alive //
+    _location = start;				// taken from second arg //
+    _begLocation = _location;			// missile's beginning location (at turret) //
+    _cursorLoc = cursor;			// _cursorLoc taken in from first arg (position where clicked) //
+    _dirToCursor = _cursorLoc - _location;	// direction to cursor, path the missile will follow //
+    _dirToCursor.safeNormalize();		// makes it safe, normalizing it //
+    _velocity = 5.0f;				// how fast the turret missile moves //
+    _radius = 3.0f;				// size of turret missile //
+    _lifespan = 60;				// life span of turret missile, when up, missile dies - memory safety //
+    _age = 0;					// increases with time, if greater than lifespan, missile is dead //
 }
 
-void TurretMissile::update()
-{
+void TurretMissile::update()			// part of the update-draw cycle; updates missile position... //
+{						// checks for collision and checks age //
     _location += _dirToCursor * _velocity;
     if(collisionDetection())
     {
@@ -40,7 +40,7 @@ void TurretMissile::update()
 
 }
 
-void TurretMissile::draw()
+void TurretMissile::draw()				// draws missile path with line, also draws missile //
 {
     if (_velocity != 0.0)
     {
@@ -53,7 +53,7 @@ void TurretMissile::draw()
 }
 
 
-bool TurretMissile::collisionDetection()
+bool TurretMissile::collisionDetection()			
 {
     int left1, left2;
     int right1, right2;
