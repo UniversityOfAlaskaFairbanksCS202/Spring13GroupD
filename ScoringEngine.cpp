@@ -22,9 +22,9 @@ ScoringEngine::ScoringEngine(int choice) //It's given the int choice and convert
 {
 _difficulty = choice;
 
-		switch (choice)
+		switch (choice) // sets the starting value for missile velocity and number of missiles for level 1 as per the difficulty passed
 		{
-			case 1: 
+			case 1: // easy difficulty
 			{ 
 				_sVelocity = 1.0f;
 				_difficulty = 1;
@@ -34,7 +34,7 @@ _difficulty = choice;
 
 
 
-			case 2: 
+			case 2: // Intermediate Difficulty
 			{
 				_sVelocity = 1.3f;
 				_difficulty = 2;
@@ -44,7 +44,7 @@ _difficulty = choice;
 
 
 
-			case 3: 
+			case 3: //Expert Difficulty
 			{ 
 				_sVelocity = 1.6f;
 				_difficulty = 3;
@@ -54,7 +54,7 @@ _difficulty = choice;
 
 
 
-			case 4: 
+			case 4: // The infamous Brandon Difficulty
 			{ 
 				_sVelocity = 8.0f;
 				_difficulty = 4;
@@ -87,8 +87,8 @@ endingscore = convert.str();
 void ScoringEngine::updateLevel() //Makes the game funner(harder) every time you go up another level.
 {
 ++_level;
-updateVelocity();
-updateMissiles();
+updateVelocity(); // increases the velocity as per the dicciulty chosen 
+updateMissiles(); // adds more missiles to the list as per difficulty selected 
 
 }
 
@@ -97,19 +97,19 @@ void ScoringEngine::updateVelocity() //CHanges the velocity every level.
 {
 switch(_difficulty)
 {
-case 1: { _sVelocity += 0.1f;
+case 1: { _sVelocity += 0.1f; // increase velocity by 0.1 every level
 break;
 }
 
-case 2: { _sVelocity += 0.3f;
+case 2: { _sVelocity += 0.3f; // increases velocity by 0.3 every level
 break;
 }
 
-case 3: { _sVelocity += 0.6f;
+case 3: { _sVelocity += 0.6f; // increases velocity by 0.6 every level
 break;
 }
 
-case 4: { _sVelocity += 5.0f;
+case 4: { _sVelocity += 5.0f; // increases velocity by 5 every level
 break;
 }
 }
@@ -120,13 +120,13 @@ void ScoringEngine::updateMissiles() //CHanges the number of missiles every leve
 {
 	switch(_difficulty)
 	{
-	case 1: _missiles += 5;
+	case 1: _missiles += 5; // adds 5 missiles every new level
 		break;
-	case 2: _missiles += 10;
+	case 2: _missiles += 10; // adds 10 missiles every new level
 		break;
-	case 3: _missiles += 15;
+	case 3: _missiles += 15; // adds 15 missiles every new level
 		break;
-	case 4: _missiles += 100;
+	case 4: _missiles += 100; // adds 100 missiles every new level
 		break;
 	}
 }
