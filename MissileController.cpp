@@ -29,11 +29,7 @@ using namespace ci::app; // cinder appplication namespace
 
 MissileController::MissileController()
 {
-}
-
-/* Updates the missile and turretmissile lists once every frame*/
-
-void MissileController::update()
+} 
 {
     for( list<Missile>::iterator p = _Missile.begin(); p != _Missile.end(); ++p)
     {
@@ -139,6 +135,8 @@ void MissileController::addTurretMissile(int numMissiles, Vec2f mousePos, Vec2f 
 }
 }
 
+/* Takes an int argument and removes an equal number of missiles forom the list of missiles*/
+
 void MissileController::removeMissiles( int numMissiles)
 {
     for( int i = 0; i< numMissiles; ++i)
@@ -147,6 +145,8 @@ void MissileController::removeMissiles( int numMissiles)
     }
 }
 
+/* Takes an int argument and removes an equal number of turretmissiles forom the list of turretmissiles*/
+
 void MissileController::removeTurretMissile(int numMissiles)
 {
     for( int i = 0; i< numMissiles; ++i)
@@ -154,6 +154,11 @@ void MissileController::removeTurretMissile(int numMissiles)
         _TurretMissile.pop_back();
     }
 }
+
+
+/* Checks for a collision between a missile and a turretmissiles once very frame
+   Returns true if collision is detected
+*/
 
 bool MissileController::collisionDetection(int radius, Vec2f turretMissileLoc, Vec2f missileLoc)
 {
