@@ -1,4 +1,13 @@
 #ifndef SCORING_ENGINE_H_INCLUDED
+/* University of Alaska,Fairbanks
+   CS-202 Group D
+   Spring 2013
+*/
+
+/* This code is released under the GNU license, you may clone this repository and edit the code without giving any credits*/
+
+/* Header file for the Scoring Engine*/
+
 #define SCORING_ENGINE_H_INCLUDED
 
 #include <iomanip>
