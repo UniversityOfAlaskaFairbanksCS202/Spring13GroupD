@@ -26,7 +26,7 @@ Missile::Missile()
      _health = true;
     _begLocation = Vec2f (Rand::randFloat(800.0), 0.0f);
     _location = _begLocation;
-    _buildingNum = Rand::randInt(0,5);
+    _buildingNum = Rand::randInt(0,4);
     _buildingLoc = _Building[_buildingNum] + centerCorrection;
     _velocity = velocity;
     _radius = 0;
@@ -53,7 +53,7 @@ void Missile::update()
             if(_structure[_buildingNum] < 3)
             {
                 _structure[_buildingNum]++;
-     			_eog++;
+				_eog++;
             }
 			else
 				return;
@@ -81,12 +81,12 @@ bool Missile::collisionDetection()
     int bottom1, bottom2;
     
     left1 = static_cast<int>(_location.x);
-    left2 = static_cast<int>(_buildingLoc.x);
-    right1 = static_cast<int>(_location.x) + 10;
+    left2 = static_cast<int>(_buildingLoc.x) - 10;
+    right1 = static_cast<int>(_location.x);
     right2 = static_cast<int>(_buildingLoc.x) + 10;
     top1 = static_cast<int>(_location.y);
-    top2 = static_cast<int>(_buildingLoc.y);
-    bottom1 = static_cast<int>(_location.y) + 10;
+    top2 = static_cast<int>(_buildingLoc.y) - 10;
+    bottom1 = static_cast<int>(_location.y);
     bottom2 = static_cast<int>(_buildingLoc.y) + 10;
     
     if (bottom1 < top2)
