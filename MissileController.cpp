@@ -1,52 +1,70 @@
+/* University of Alaska, Fairbanks 
+   CS-202 Group D
+   Spring 2013
+*/
+
+/* This code is released under the standard GNU license, you may clone this repository and release your own version
+   without any author credits
+*/
+
+/* This source file handles the list of missiles and turret missiles and also checks for if a missile is hit*/
+
+/* Basic Cinder includes*/
+
 #include "cinder/app/AppBasic.h"
 #include "cinder/Rand.h"
 
+/* Custom header includes*/
 #include "MissileController.h"
 #include "Missile.h"
 #include "TurretMissile.h"
 #include "ScoringEngine.h"
 
 
-using namespace ci;
+using namespace ci; // cinder namescape
 using std::list;
-using namespace ci::app;
+using namespace ci::app; // cinder appplication namespace
+
+/* default constructor for missile controller,does nothing*/
 
 MissileController::MissileController()
 {
 }
 
+/* Updates the missile and turretmissile lists once every frame*/
+
 void MissileController::update()
 {
     for( list<Missile>::iterator p = _Missile.begin(); p != _Missile.end(); ++p)
     {
-        if(!(p->_health))
+        if(!(p->_health)) // checks if missile health is false (missile has either hit a building or hit with turretmissile)
         {
-            p = _Missile.erase(p);
+            p = _Missile.erase(p); // erases the missile
             
         }
         else
         {
-            if (_Missile.size()!=0)
+            if (_Missile.size()!=0) //checks if the list is not empty
             {
-                p->update();
+                p->update(); // runs through the update function again
             }
         }
         
-        if (_Missile.size() == 0)
-     return;
+        if (_Missile.size() == 0) // Bug fix for out of range error once last miisle was destroyed
+     return; // exits the uodate function 
     
     }
     
-    for( list<TurretMissile>::iterator Q = _TurretMissile.begin(); Q != _TurretMissile.end(); ++Q)
+    for( list<TurretMissile>::iterator Q = _TurretMissile.begin(); Q != _TurretMissile.end(); ++Q) // iterates through the list of turrretmissiles
     {
-        if(!(Q->_health))
+        if(!(Q->_health)) // Checks if health is false (Turret missile has hit a missile or has gone out of playable area)
         {
-            Q = _TurretMissile.erase(Q);
+            Q = _TurretMissile.erase(Q); // if health is false, erase turretmissile at position Q
             
         }
         else
         {
-            if (_TurretMissile.size()>0)
+            if (_TurretMissile.size()>0) // is list size is greater than 0, run through update again
             {
                 Q->update();
             }
@@ -57,7 +75,7 @@ void MissileController::update()
             }
         }
         
-        if (_TurretMissile.size() == 0)
+        if (_TurretMissile.size() == 0) // bug fix for last turretmissile out of range 
 return;
     }
     
@@ -71,7 +89,7 @@ return;
                 {
                     ScoringEngine player;
                     p = _Missile.erase(p);
-                    player.updateScore();
+                    player.updateScore(); // if a missile is destroyed, score is increased
 
 if (_Missile.size() == 0 || _TurretMissile.size())
 return;
@@ -81,6 +99,9 @@ return;
     }
     
 }
+
+
+/* Draws the missiles and turretmissiles every frame */
 
 
 void MissileController::draw()
@@ -98,6 +119,8 @@ void MissileController::draw()
     }
 }
 
+/* Takes an int as a parameter and adds an equal number of missile to the missile list*/
+
 void MissileController::addMissiles(int numMissiles)
 {
 for( int i = 0; i< numMissiles; ++i)
@@ -105,6 +128,8 @@ for( int i = 0; i< numMissiles; ++i)
         _Missile.push_back ( Missile());
 }
 }
+
+/* Takes an int as a parameter and adds an equal number of turretrmissiles to the turretmissiles list*/
 
 void MissileController::addTurretMissile(int numMissiles, Vec2f mousePos, Vec2f startHolder)
 {
