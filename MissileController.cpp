@@ -30,6 +30,10 @@ using namespace ci::app; // cinder appplication namespace
 MissileController::MissileController()
 {
 } 
+
+
+
+void MissileController::update()
 {
     for( list<Missile>::iterator p = _Missile.begin(); p != _Missile.end(); ++p)
     {
